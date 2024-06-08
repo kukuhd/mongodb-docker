@@ -1,0 +1,30 @@
+#docker-compose.yml template for replicaset
+
+version: '3'
+services:
+  mongo-wa-6:
+    image: mongo:6
+    ports:
+      - "27031:27017"
+    container_name: mongo-wa-6
+    restart: always
+    volumes:
+      - ./data:/data/db
+    extra_hosts:
+      - 'host:iphost'
+      - 'host:iphost'
+    command: ["mongod", "--replSet", "rs0", "--bind_ip", "0.0.0.0"]
+
+#docker-compose.yml normal
+
+version: '3'
+services:
+  mongo-6:
+    image: mongo:6
+    ports:
+      - "27027:27017"
+    container_name: mongo-prod
+    restart: always
+    volumes:
+      - ./data:/data/db
+
